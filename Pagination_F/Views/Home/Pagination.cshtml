@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Pagination_F.Models.User>
+
+@{
+    ViewData["Title"] = "Pagination";
+}
+
+<h1>Pagination</h1>
+
+@*@foreach (var user in Model)
+{
+    <p>@user.Name</p>
+}
+
+<div>
+    Page @ViewBag.CurrentPage of @ViewBag.TotalPages
+    <br />
+    Total Users: @ViewBag.TotalCount
+</div>
+
+<div>
+    @if (ViewBag.CurrentPage > 1)
+    {
+        @Html.ActionLink("Previous", "Pagination", new { page = ViewBag.CurrentPage - 1 })
+    }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        if (i == ViewBag.CurrentPage)
+        {
+            <strong>@i</strong>
+        }
+        else
+        {
+            @Html.ActionLink(i.ToString(), "Pagination", new { page = i })
+        }
+    }
+
+   </div>*@
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+}
+<tr>
+    @if (ViewBag.CurrentPage > 1)
+    {
+        @Html.ActionLink("Previous", "Pagination", new { page = ViewBag.CurrentPage - 1 })
+    }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        if (i == ViewBag.CurrentPage)
+        {
+            <strong>@i</strong>
+        }
+        else
+        {
+            @Html.ActionLink(i.ToString(), "Pagination", new { page = i })
+        }
+    }
+
+</tr>
+    </tbody>
+</table>
